@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MenuMapper">
+    <!-- 조회한 컬럼과 DTO를 매핑시키기 위한 설정 -->
+    <resultMap id="menuResultMap" type="com.xmlconfig.MenuDTO">
+        <id property="code" column="MENU_CODE"/>
+        <result property="name" column="MENU_NAME"/>
+        <result property="price" column="MENU_PRICE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+    </resultMap>
+
+    <select id="selectAllMenu" resultMap="menuResultMap">
+        SELECT
+            MENU_CODE,
+            MENU_NAME,
+            MENU_PRICE,
+            CATEGORY_CODE,
+            ORDERABLE_STATUS
+        FROM
+            TBL_MENU
+        WHERE
+            ORDERABLE_STATUS = 'Y'
+        ORDER BY
+            MENU_CODE
+    </select>
+
+    <!--
+        파라미터가 한 개인 경우 바인딩 되는 이름은 상관 없으며, 파라미터 타입을 지정하지 않아도 된다.
+        - resultMap : 위에서 생성한 resultMap을 리턴 타입을 이용하는 경우
+        - resultType : 이미 정의되어 잇는 타입을 이용하여 리턴 타입으로 이용하는 경우
+        - parameterType : 파라티머로 전달되는 값의 타입을 작성(생략해도 상관 없음)
+    -->
+    <select id="selectMenuByCode" parameterType="_int" resultMap="menuResultMap">
+        SELECT
+            MENU_CODE,
+            MENU_NAME,
+            MENU_PRICE,
+            CATEGORY_CODE,
+            ORDERABLE_STATUS
+        FROM
+            TBL_MENU
+        WHERE
+            ORDERABLE_STATUS = 'Y'
+        AND
+            MENU_CODE = #{ code }
+    </select>
+
+    <!--
+        insert, update, delete의 경우 resultType은 작성하지 않고, 기본 _int로 수행 결과를 반환한다.
+        파라미터로 전달된 DTO의 필드명으로 값을 바인딩 해야하며, getter를 이용하므로 getter가 없으면 에러가 발생한다.
+        파라미터 타입도 생략이 가능하다.
+    -->
+    <insert id="insertMenu" parameterType="com.xmlconfig.MenuDTO">
+        INSERT INTO TBL_MENU
+        (
+            MENU_NAME,
+            MENU_PRICE,
+            CATEGORY_CODE,
+            ORDERABLE_STATUS
+        )
+        VALUE
+        (
+            #{ name },
+            #{ price },
+            #{ categoryCode },
+            'Y'
+        )
+    </insert>
+
+    <update id="updateMenu" parameterType="com.xmlconfig.MenuDTO">
+        UPDATE TBL_MENU
+        SET
+            MENU_NAME = #{ name },
+            MENU_PRICE = #{ price },
+            CATEGORY_CODE = #{ categoryCode }
+        WHERE
+            MENU_CODE = #{ code }
+    </update>
+
+    <delete id="deleteMenu" parameterType="_int">
+        DELETE FROM TBL_MENU
+        WHERE
+            MENU_CODE = #{ code }
+    </delete>
+</mapper>
