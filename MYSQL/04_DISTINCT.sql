@@ -1,0 +1,39 @@
+/* DISTINCT */
+/* 중복된 값을 제거하는데 사용된다. 컬럼에 있는 컬럼값들의 종류를 쉽게 파악할 수 있다. */
+SELECT 
+    CATEGORY_CODE
+FROM
+    TBL_MENU
+ORDER BY CATEGORY_CODE;
+
+-- 단일 열 DISTINCT 활용
+SELECT DISTINCT
+    CATEGORY_CODE
+FROM
+    TBL_MENU
+ORDER BY CATEGORY_CODE;
+
+-- NULL 값을 포함한 열 조회
+SELECT 
+    REF_CATEGORY_CODE
+FROM
+    TBL_CATEGORY;
+    
+-- NULL 값을 포함한 열의 DISTINCT 활용
+SELECT DISTINCT
+    REF_CATEGORY_CODE
+FROM
+    TBL_CATEGORY;
+
+-- 다중열 조회
+SELECT 
+    CATEGORY_CODE, ORDERABLE_STATUS
+FROM
+    TBL_MENU;
+
+-- 다중열 DISTINCT 사용
+-- 다중열의 값들이 모두 동일하면 중복된 것으로 판별한다.
+SELECT DISTINCT
+    CATEGORY_CODE, ORDERABLE_STATUS
+FROM
+    TBL_MENU;

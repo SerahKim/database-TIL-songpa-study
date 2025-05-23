@@ -1,0 +1,34 @@
+-- 1. 전공(MAJOR)별 학생 수를 구하시오.
+SELECT
+	MAJOR, COUNT(*) '학생수'
+FROM 
+	STUDENT
+GROUP BY 
+	MAJOR;
+
+-- 2. 학생 수가 1명보다 많은 전공만 조회하시오.
+SELECT
+	MAJOR, COUNT(*) '학생수'
+FROM 
+	STUDENT
+GROUP BY 
+	MAJOR
+HAVING 
+	COUNT(*) > 1;
+    
+-- 3. 과목을 수강하지 않은 학생의 이름을 조회하시오.
+-- SUBQUERY
+SELECT
+	S.STUDENT_NAME
+FROM 
+	STUDENT S
+LEFT JOIN
+	COURSE C USING (STUDENT_ID)
+WHERE C.COURSE_NAME IS NULL;
+
+-- 4. 수강 과목 이름을 중복 없이 조회하시오.
+SELECT DISTINCT
+	C.COURSE_NAME
+FROM
+	STUDENT S
+JOIN COURSE C USING(STUDENT_ID);
