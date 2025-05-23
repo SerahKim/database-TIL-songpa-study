@@ -17,6 +17,6 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="chapter01_connection_config/xmlconfig/mapper.xml"/>
+        <mapper resource="xmlconfig/mapper.xml"/>
     </mappers>
 </configuration>

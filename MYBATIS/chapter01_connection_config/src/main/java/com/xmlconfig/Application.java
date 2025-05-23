@@ -1,4 +1,4 @@
-package com.chapter01_connection_config.xmlconfig;
+package com.xmlconfig;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 public class Application {
     public static void main(String[] args) {
-        String resource = "chapter01_connection_config/xmlconfig/mybatis-config.xml";
+        String resource = "xmlconfig/mybatis-config.xml";
         try {
             InputStream inputStream = Resources.getResourceAsStream(resource);
 

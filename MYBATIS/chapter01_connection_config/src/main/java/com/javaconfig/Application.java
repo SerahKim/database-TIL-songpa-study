@@ -1,4 +1,4 @@
-package com.chapter01_connection_config.javaconfig;
+package com.javaconfig;
 
 import org.apache.ibatis.datasource.pooled.PooledDataSource;
 import org.apache.ibatis.mapping.Environment;
