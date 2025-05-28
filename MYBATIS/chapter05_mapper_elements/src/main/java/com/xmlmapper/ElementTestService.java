@@ -1,5 +1,6 @@
 package com.xmlmapper;
 
+import com.common.CategoryAndMenuDTO;
 import com.common.MenuAndCategoryDTO;
 import com.common.MenuDTO;
 import org.apache.ibatis.session.SqlSession;
@@ -42,6 +43,30 @@ public class ElementTestService {
 
         List<MenuAndCategoryDTO> menuList = mapper.selectResultMapAssociationTest();
         for (MenuAndCategoryDTO menu : menuList) {
+            System.out.println(menu);
+        }
+
+        sqlSession.close();
+    }
+
+    public void selectResultMapCollection() {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(ElementTestMapper.class);
+
+        List<CategoryAndMenuDTO> categoryList = mapper.selectResultMapCollectionTest();
+        for (CategoryAndMenuDTO category : categoryList) {
+            System.out.println(category);
+        }
+
+        sqlSession.close();
+    }
+
+    public void selectSqlTest() {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(ElementTestMapper.class);
+
+        List<MenuDTO> menuList = mapper.selectionSqlTest();
+        for (MenuDTO menu : menuList) {
             System.out.println(menu);
         }
 

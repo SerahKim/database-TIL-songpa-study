@@ -120,4 +120,76 @@
             A.ORDERABLE_STATUS = 'Y'
     </select>
 
+    <!-- <collection> -->
+    <!-- 1. 따로 만든 resultMap을 사용하는 방법 -->
+    <!--<resultMap id="categoryAndResultMap" type="com.common.CategoryAndMenuDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+        <collection property="menuDTOList" resultMap="menuResultMap"/>
+    </resultMap>
+
+    <resultMap id="menuResultMap" type="com.common.MenuDTO">
+        <id property="code" column="MENU_CODE"/>
+        <result property="name" column="MENU_NAME"/>
+        <result property="price" column="MENU_PRCIE"/>
+        <result property="categoryCode" column="CATEGORY_CODE"/>
+        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+    </resultMap>-->
+
+    <!-- 2. collection 내에 id, result 작성하는 방법 -->
+    <resultMap id="categoryAndResultMap" type="com.common.CategoryAndMenuDTO">
+        <id property="code" column="CATEGORY_CODE"/>
+        <result property="name" column="CATEGORY_NAME"/>
+        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+        <collection property="menuDTOList" ofType="com.common.MenuDTO">
+            <id property="code" column="MENU_CODE"/>
+            <result property="name" column="MENU_NAME"/>
+            <result property="price" column="MENU_PRCIE"/>
+            <result property="categoryCode" column="CATEGORY_CODE"/>
+            <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectResultMapCollectionTest" resultMap="categoryAndResultMap">
+        SELECT
+            A.CATEGORY_CODE,
+            A.CATEGORY_NAME,
+            A.REF_CATEGORY_CODE,
+            B.MENU_CODE,
+            B.MENU_NAME,
+            B.MENU_PRICE,
+            B.CATEGORY_CODE,
+            B.ORDERABLE_STATUS
+        FROM
+            TBL_CATEGORY A
+        LEFT JOIN TBL_MENU B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        ORDER BY A.CATEGORY_CODE
+    </select>
+
+    <!-- <sql> 엘리먼트 : 각 매핑 구문에서 공통으로 사용할 수 있는 SQL 문자열의 일부를 정의하고 재사용하기 위해 사용한다. -->
+    <sql id="colums">
+        MENU_CODE,
+        MENU_NAME,
+        MENU_PRICE,
+        CATEGORY_CODE,
+        ORDERABLE_STATUS
+    </sql>
+
+    <select id="selectionSqlTest" resultMap="menuResultMap2">
+        SELECT
+        <include refid="colums"/>
+        FROM
+            TBL_MENU
+        WHERE ORDERABLE_STATUS = 'Y'
+    </select>
+
+    <!--
+    <discriminator> 엘리먼트
+    Mybatis 설정에서는 resultMap 혹은 resultType 매핑 한 가지만 선택할 수 있다.
+    즉, 매핑 구문 아이디별로 결과 매핑은 고정되어 있는 상태이다.
+    하지만 개발하다 보면 매핑 구문은 동일하게 작성하고, 동적으로 결과를 매핑해야 하는 상황이 발생할 수 있다.
+    discriminator 엘리먼트를 이용하면 매핑 과정에서 동적으로 결과를 매핑하는 기능을 제공한다.
+    하지만 상속관계에 있는 클래스를 동적으로 처리할 때 사용하며 활용도에 비해 난이도가 높기 때문에 수업에서는 생략한다.
+    -->
 </mapper>

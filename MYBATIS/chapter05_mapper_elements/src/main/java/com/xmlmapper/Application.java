@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Application {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        ElementTestService elementTestService = new ElementTestService();
         do {
             System.out.println("========= 매퍼 element 테스트 메뉴 ==========");
             System.out.println("1. <resultMap> 서브 메뉴");
@@ -18,6 +19,8 @@ public class Application {
                     resultMapSubMenu();
                     break;
                 case 2 :
+                    elementTestService.selectSqlTest();
+                    break;
             }
         } while (true);
     }
@@ -44,7 +47,10 @@ public class Application {
                     break;
                 case 3:
                     elementTestService.selectResultMapAssociationTest();
+                    break;
                 case 4:
+                    elementTestService.selectResultMapCollection();
+                    break;
 
             }
         } while (true);
