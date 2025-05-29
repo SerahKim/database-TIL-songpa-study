@@ -14,4 +14,7 @@
             </dataSource>
         </environment>
     </environments>
+    <mappers>
+        <package name="section250528.mapper"/>
+    </mappers>
 </configuration>

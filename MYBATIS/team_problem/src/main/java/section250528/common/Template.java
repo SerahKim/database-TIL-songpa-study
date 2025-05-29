@@ -1,4 +1,4 @@
-package section_250528.common;
+package section250528.common;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

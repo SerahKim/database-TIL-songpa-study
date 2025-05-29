@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 인터페이스 연결 -->
+<mapper namespace="section250528.mapper.SchoolMapper">
+    <!-- resultMap 세팅 -->
+    <resultMap id="studentResultMap" type="section250528.model.StudentDTO">
+        <id property="studentId" column="STUDENT_ID"/>
+        <result property="studentName" column="NAME"/>
+        <result property="studentAge" column="AGE"/>
+        <result property="studentMajor" column="MAJOR"/>
+    </resultMap>
+
+    <resultMap id="courseResultMap" type="section250528.model.CourseDTO">
+        <id property="courseId" column="COURSE_ID"/>
+        <result property="courseTitle" column="TITLE"/>
+        <result property="courseInstructor" column="INSTRUCTOR"/>
+        <result property="courseCredit" column="CREDIT"/>
+    </resultMap>
+
+
+    <insert id="insertStudentTable" parameterType="section250528.model.StudentDTO">
+        INSERT INTO TBL_STUDENT
+        (
+            NAME,
+            AGE,
+            MAJOR
+        )
+        VALUES
+        (
+            #{ studentName },
+            #{ studentAge },
+            #{ studentMajor }
+        )
+    </insert>
+
+    <insert id="insertCourseTable" parameterType="section250528.model.CourseDTO">
+        INSERT INTO TBL_COURSE
+        (
+            TITLE,
+            INSTRUCTOR,
+            CREDIT
+        )
+        VALUES
+        (
+            #{ courseTitle },
+            #{ courseInstructor },
+            #{ courseCredit }
+        )
+    </insert>
+
+    <select id="selectAllStudentTable" resultMap="studentResultMap">
+        SELECT
+            STUDENT_ID,
+            NAME,
+            AGE,
+            MAJOR
+        FROM
+            TBL_STUDENT
+    </select>
+
+    <select id="selectAllCourseTable" resultMap="courseResultMap">
+        SELECT
+            COURSE_ID,
+            TITLE,
+            INSTRUCTOR,
+            CREDIT
+        FROM
+            TBL_COURSE
+    </select>
+</mapper>

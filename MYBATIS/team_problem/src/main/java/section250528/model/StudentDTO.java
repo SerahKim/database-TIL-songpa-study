@@ -1,16 +1,16 @@
-package section_250528;
+package section250528.model;
 
 public class StudentDTO {
     private int studentId;
-    private String studnetName;
+    private String studentName;
     private int studentAge;
     private String studentMajor;
 
     public StudentDTO() {}
 
-    public StudentDTO(int studentId, String studnetName, int studentAge, String studentMajor) {
+    public StudentDTO(int studentId, String studentName, int studentAge, String studentMajor) {
         this.studentId = studentId;
-        this.studnetName = studnetName;
+        this.studentName = studentName;
         this.studentAge = studentAge;
         this.studentMajor = studentMajor;
     }
@@ -23,12 +23,12 @@ public class StudentDTO {
         this.studentId = studentId;
     }
 
-    public String getStudnetName() {
-        return studnetName;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setStudnetName(String studnetName) {
-        this.studnetName = studnetName;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
     public int getStudentAge() {
@@ -51,7 +51,7 @@ public class StudentDTO {
     public String toString() {
         return "StudentDTO{" +
                 "studentId=" + studentId +
-                ", studnetName='" + studnetName + '\'' +
+                ", studentName='" + studentName + '\'' +
                 ", studentAge=" + studentAge +
                 ", studentMajor='" + studentMajor + '\'' +
                 '}';
